@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<classpath>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="src" path="AttendanceManagement/src/main/java"/>
-	<classpathentry kind="src" path="AttendanceManagement/src/test/java"/>
-	<classpathentry kind="src" path="test/src"/>
-	<classpathentry kind="lib" path="AttendanceManagement/gradle/wrapper/gradle-wrapper.jar"/>
-	<classpathentry kind="output" path="test/bin"/>
-</classpath>
