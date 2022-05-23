@@ -1,0 +1,17 @@
+package com.example.demo.service;
+
+import com.example.demo.entity.Timestamp;
+import com.example.demo.repository.TimestampDao;
+
+public class TimestampServiceImpl implements TimestampService{
+private final TimestampDao dao;
+	
+	public TimestampServiceImpl(TimestampDao dao) {
+		this.dao = dao;
+	}
+	
+	@Override
+	public void save(Timestamp timestamp) {
+		dao.insertTimestamp(timestamp);
+	}
+}

@@ -1,0 +1,10 @@
+package com.example.demo.repository;
+
+import java.util.Optional;
+
+import com.example.demo.entity.Member;
+
+public class IMemberAccountDao {
+	// Memberを取得
+    Optional<Member> findMember(String id);
+}

@@ -1,0 +1,4 @@
+INSERT INTO member(id,name, level, password)
+VALUES('admin', 'admin', 3,'password');
+INSERT INTO member(id,name, level, password)
+VALUES('200013', 'kaneko', 2,'kaneko');

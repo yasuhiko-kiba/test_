@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title th:text="${title}">Insert title here</title>
+</head>
+<body>
+<h1 th:text="${title}">仮のタイトル</h1>
+<form method="post" action="#" th:action="@{/login}" th:object="${loginForm}">
+	<label for="id">id:</label>
+	<input id="id" name="id" type="text" th:value="*{id}"><br>
+	<div th:if="${#fields.hasErrors('id')}" th:errors="*{id}"></div>
+	<label for="password">パスワード:</label>
+	<input id="password" name="password" type="text"><br>
+	<div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+	<input type="submit" value="ログイン">
+	
+</form>
+</body>
+</html>

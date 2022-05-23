@@ -1,0 +1,4 @@
+INSERT INTO member(id,name, level, password,created)
+VALUES('admin', 'admin', 3,'password', CURRENT_TIMESTAMP());
+INSERT INTO member(id,name, level, password,created)
+VALUES('200013', 'kaneko', 2,'kaneko', CURRENT_TIMESTAMP());

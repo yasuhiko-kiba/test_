@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title th:text="${title}">Insert title here</title>
+</head>
+<body>
+<div th:replace="~{block/header::headerA}"></div>
+<h1 th:text="${title}">仮のタイトル</h1>
+<div th:if="${param.complete}" >
+	更新が完了しました。
+</div>
+<h2 th:text="${complete}"></h2>
+<form method="post" action="#" th:action="@{/login}" th:object="${loginForm}">
+	<label for="id">id:</label>
+	<input id="id" name="id" type="text" th:value="*{id}"><br>
+	<label for="password">パスワード:</label>
+	<input id="password" name="password" type="text"><br>
+	<input type="submit" value="ログイン">
+	
+</form>
+</body>
+</html>

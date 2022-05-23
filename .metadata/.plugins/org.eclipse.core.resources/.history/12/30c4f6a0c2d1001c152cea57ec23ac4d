@@ -1,0 +1,10 @@
+package com.example.demo.repository;
+
+import java.util.Optional;
+
+import org.springframework.security.core.userdetails.User;
+ 
+public interface IUserAccountDao {
+    // Userを取得
+    Optional<User> findUser(String userId);
+}

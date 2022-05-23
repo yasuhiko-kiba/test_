@@ -1,0 +1,41 @@
+package com.example.demo.repository;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Map;
+
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
+
+import com.example.demo.entity.Timestamp;
+@Repository
+public class TimestampDaoImpl  implements TimestampDao{
+private final JdbcTemplate jdbcTemplate;
+	
+	public TimestampDaoImpl(JdbcTemplate jdbcTemplate) {
+		this.jdbcTemplate = jdbcTemplate;
+	}
+
+	@Override
+	public void insertTimestamp(Timestamp timestamp) {
+		jdbcTemplate.update("INSERT INTO timestamps(user_id, attendance_status, name, timestamp) VALUES(?, ?, ?, ?)",
+				timestamp.getUser_id(), timestamp.getAttendance_status(), timestamp.getName(), getDate());		
+	}
+	public String getDate() {
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss.SSS"); 
+	        String formatNowDate = dtf.format(LocalDateTime.now()); 
+	        return formatNowDate;
+	}
+	
+	@Override
+	public boolean getAttendanceStatus(String user_id) {
+		String sql = "SELECT leave_time FROM timestamps WHERE user_id = ?  ORDER BY attendance_date DESC LIMIT 1";
+		Map<String, Object> result = jdbcTemplate.queryForMap(sql, user_id);
+		System.out.println(result);
+		if(result.get("leave_time") != null) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+}

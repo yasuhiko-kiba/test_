@@ -1,0 +1,49 @@
+package com.example.demo.repository;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.stereotype.Repository;
+
+import com.example.demo.entity.Member;
+
+@Repository
+public class MemberAccountDao implements IMemberAccountDao{
+	private final NamedParameterJdbcTemplate jdbcTemplate;
+    
+    @Autowired
+    public MemberAccountDao(NamedParameterJdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
+     
+    @Override
+    public Optional<Member> findMember(String id) {
+         
+        String sql = "SELECT id, password, username "
+                + "FROM member "
+                + "WHERE id = :id";
+        // パラメータ設定用Map
+        Map<String, Object> param = new HashMap<>();
+        param.put("id", id);
+         
+        Member member = new Member();
+        // 一件取得
+        try {
+            Map<String, Object> result = jdbcTemplate.queryForMap(sql, param);
+            member.setId((String) result.get("id"));
+            member.setPassword((String)result.get("password"));
+            member.setName((String)result.get("username"));
+        }catch(EmptyResultDataAccessException e){
+            Optional <Member> userOpl = Optional.ofNullable(member);
+            return userOpl;
+        }
+         
+        // ラップする
+        Optional <Member> userOpl = Optional.ofNullable(member);
+        return userOpl;
+    }
+}

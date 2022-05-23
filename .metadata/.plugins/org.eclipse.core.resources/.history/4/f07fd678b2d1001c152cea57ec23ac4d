@@ -1,0 +1,29 @@
+package com.example.demo.service;
+
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
+import com.example.demo.entity.Member;
+import com.example.demo.entity.MemberDetails;
+
+public class MemberService implements UserDetailsService{
+	private final IUserAccountDao dao;
+    
+    @Autowired
+    public MemberService(IUserAccountDao dao) {
+        this.dao = dao;
+    }
+    @Override
+    public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
+         
+        Optional<Member> member = dao.findUser(userId);
+        if(!member.isPresent()) {
+            throw new UsernameNotFoundException(userId + "が存在しません");
+        }   
+        return new MemberDetails(member.get());
+    }
+}

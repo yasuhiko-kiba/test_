@@ -1,0 +1,15 @@
+package service;
+
+import java.util.ArrayList;
+
+import entity.Member;
+
+public class MemberServiceImpl implements MemberService {
+
+	@Override
+	public ArrayList<Member> getAll() {
+		ArrayList<Member> list = new ArrayList<>();
+		Member mem1 = new member(1)
+	}
+
+}

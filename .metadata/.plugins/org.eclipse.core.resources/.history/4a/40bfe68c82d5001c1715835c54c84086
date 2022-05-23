@@ -1,0 +1,28 @@
+package com.example.demo.repository;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
+
+import com.example.demo.entity.Timestamp;
+@Repository
+public class TimestampDaoImpl  implements TimestampDao{
+private final JdbcTemplate jdbcTemplate;
+	
+	public TimestampDaoImpl(JdbcTemplate jdbcTemplate) {
+		this.jdbcTemplate = jdbcTemplate;
+	}
+
+	@Override
+	public void insertTimestamp(Timestamp timestamp) {
+		jdbcTemplate.update("INSERT INTO timestamps(user_id, attendance_status, name, timestamp) VALUES(?, ?, ?, ?)",
+				timestamp.getUser_id(), timestamp.getAttendance_status(), timestamp.getName(), getDate());		
+	}
+	public String getDate() {
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss.SSS"); 
+	        String formatNowDate = dtf.format(LocalDateTime.now()); 
+	        return formatNowDate;
+	}
+}
