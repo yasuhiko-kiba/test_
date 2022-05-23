@@ -1,9 +1,0 @@
-CREATE TABLE member
-(
-   id VARCHAR(100) NOT NULL,
-   name VARCHAR(100) NOT NULL,
-   level INT NOT NULL,
-   password VARCHAR(100) NOT NULL,
-   created DATETIME NOT NULL CURRENT_DATETIME(),
-   PRIMARY KEY(id)
-);
